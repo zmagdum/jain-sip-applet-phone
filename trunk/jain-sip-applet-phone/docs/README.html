@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Jean Deruelle and M. Ranganathan">
+  <meta name="GENERATOR"
+ content="Mozilla/4.75 [en] (X11; U; Linux 2.2.14-5.0 i686) [Netscape]">
+  <title>A JAIN-SIP Applet Phone For the People!</title>
+</head>
+<body text="#000000" background="images/back.gif" link="#0000ff"
+ vlink="#ff0000" alink="#000088">
+<h1>
+<center> <i> <font color="blue"> A JAIN-SIP Applet Phone For the
+People! </font> </i> </center>
+</h1>
+<blockquote>
+  <ul>
+    <li> <a href="#1">1. What's in this package?</a> </li>
+    <li> <a href="#2">2. GOAL &amp; JAIN SIP Applet phone capabilities</a></li>
+    <li> <a href="#3">3. Start the JAIN SIP Services Platform</a></li>
+    <li><a href="#4">4. Start the JAIN SIP Services Platform</a></li>
+    <li> <a href="#5">5. Quick Start</a></li>
+    <li><a href="#6">6. Starting the Gateway</a></li>
+    </li>
+  </ul>
+  <h2> <u><a name="1"></a>1. What's in this package?</u></h2>
+&nbsp;&nbsp;&nbsp; This package contains the source code of a JAVA
+based SIP User Agent built on top of the <a
+ href="http://www-x.antd.nist.gov/proj/iptel/src/nist-sip/jain-sip/docs/api/overview-summary.html"
+ target="_blank">JAIN-SIP-1.1 API&nbsp;</a> and <a
+ href="http://java.sun.com/products/java-media/jmf/" target="_blank">JMF</a><br>
+&nbsp;&nbsp;&nbsp; The source code for this package is located in src/
+directory. The JAIN-SIP-APPLET_PHONE is a JAIN-SIP application: it does
+not need proprietary nist-sip
+classes in addition of those defined in JAIN-SIP 1.1, you can
+substitute
+the NIST-SIP stack by another JAIN-SIP-1.1 compliant stack and it
+should
+interoperate.<br>
+&nbsp;&nbsp;&nbsp; The source code contains the Sip User Agent and the
+web application allowing one to host the jain-sip-applet-phone on a web
+server. (Tested only on the jakarta Tomcat web server so far).<br>
+  <br>
+  <h2> <u><a name="2"></a>2. GOAL &amp; JAIN SIP Applet Phone
+capabilities</u></h2>
+  <br>
+&nbsp;&nbsp;&nbsp; First of all, the Applet-phone is a SIP User-Agent
+with audio and text messaging capabilities. But it is also embedded in
+an applet where you can use it as usual if your firewall allow you to
+use the UDP transport. If not, you can use TCP to carry your voice in a
+voice messaging fashion. Your voice is recorded and encoded locally
+then sent as a message, decoded and played back by your peer. Voice
+messaging allow you to go through any firewall, so that you can
+continue to chat and talk with your friends from an applet !<br>
+  <ul>
+    <br>
+  </ul>
+  <o:p></o:p>
+  <p></p>
+  <h2><u><a name="3"></a>3. Start the Jain Sip Applet Phone as a
+regular SIP User Agent<br>
+  </u></h2>
+  <ul>
+    <li>Use the build.xml file provided in the root directory to start
+the Jain
+Sip Applet Phone<br>
+    </li>
+    <li>Don't forget to put the path to your own java JMF distribution
+home path in either build.windows.properties file or
+build.linux.properties file depending on which OS you're using.<br>
+The command to execute is:<font color="red" size="+2"> ant messenger </font>.
+(This command clean everything, compile the source code and run the
+application). </li>
+  </ul>
+  <br>
+  <h2><u><u><a name="4"></a></u>4. Start the Jain Sip Applet Phone as
+an applet<br>
+  </u></h2>
+  <ul>
+    <li>Use the build.xml file provided in the root directory to start
+the Jain Sip Applet Phone<br>
+    </li>
+    <li>Don't forget to put the path to your own java Tomcat
+distribution home path in either build.windows.properties file or
+build.linux.properties file depending on which OS you're using.</li>
+    <li>Don't forget to put the path to your own java JMF distribution
+home path in either build.windows.properties file or
+build.linux.properties file depending on which OS you're using.<br>
+The command to execute is:<font color="red" size="+2"> ant deploy-windows</font> 
+or <font color="red" size="+2"> ant deploy-linux</font> . (This
+command clean everything, compile the source code and deploy the
+application on the jakarta tomcat web server). </li>
+    <li>Open your favorite internet browser and go to the following
+link : <font color="red" size="+1"> http://[hostname]:[port]/phone</font>.
+      <ul>
+        <li>the hostname is the name of the machine where you want to
+start the platform.<br>
+        </li>
+        <li>the port is the http listening port of your tomcat
+distribution, by default 8080. </li>
+      </ul>
+    </li>
+  </ul>
+  <h2><u><a name="5"></a>5. Quick Start to start your applet<br>
+  </u></h2>
+  <p class="MsoNormal" style="text-align: justify;"><span style=""><span
+ style=""> 1. Go to the root installation directory
+of this
+distribution and change in the build.windows.properties file the value
+of these three
+fields : tomcat.home and jmf.home and java.home. Put the value of these
+fields to
+your own installation distributions directory.<br>
+2. </span></span><span style=""><span style="">Go
+to the root installation directory of this
+distribution. Make sure the
+build.xml has the right setting for the build.properties
+(edit it if needed).
+Make sure that the build.properties file is correctly specified (either
+build.linux.properties or build.windows.properties).<br>
+ 3. Start your favorite sip proxy (for example
+<a href="https://jain-sip-presence-proxy.dev.java.net/">jain-sip-proxy</a> or <a href="http://www.iptel.org/ser/">SER</a> or the <a href="https://jain-sip-gateway.dev.java.net/">gateway</a>) <br>
+ 4. Go into the src/gov/nist/applet/phone/webapp/pages directory of this
+jain-sip-applet-phone distribution and open the SipAppletPhone.jsp
+file. Change the value of the applet parameter
+PROXYPORT to your own. This parameter is passed back to the applet and must
+correspond to a TCP listening port of the SIP proxy. <br>
+5. Start a shell and go to the root installation directory of this
+distribution.<br>
+6. Type ant deploy-windows if you are under windows
+or ant deploy-linux if you are under linux.<br>(It will create a war and
+deploy it in the tomcat_home/webapp directory. There tomcat will
+undeploy the war and  start the application when it will start.)<br>
+7. Install jmf (native to your OS for best results -
+ie. windows performance pack of jmf works best).<br> 
+Make sure JMF is correctly installed by checking on the JMF 
+<a href="http://java.sun.com/products/java-media/jmf/2.1.1/jmfdiagnostics.html">diagnostics</a> webpage.<BR>
+8.<font color="red" size="+1">Very important, otherwise the applet cannot find the classes:</font><BR>
+In the java plugin configuration panel (for windows, in start menu->Control Panel->Java Plug-in), uncheck the
+checkbox "activate cache" in the cache tab and uncheck also in the tab proxies the checkbox "use the browser
+parameters".<br>
+9. Open a web browser and go to this address http://your.webserver.ip.address:port/phone <br>
+10. Login to the proxy with a valid account name (example: deruelle@nist.gov)<br>
+11. Click on the </span></span><span style=""><span style="">submit </span></span><span style=""><span style="">button.<br>
+This will start the Applet phone and log you into the proxy.
+1. If you don't have jmf installed or not correctly
+installed on your machine a pop up will notify you otherwise you can go
+on and play with the applet phone <br>
+
+<font color="red" size="+2">Beware:</font><BR>
+Since applet allows only socket connections to the host they have
+been dowloaded from, the SIP Proxy and tomcat webserver must be hosted on the same machine (i.e. have the
+same IP address, in case your machine has two network interfaces).<BR>
+<BR>
+Here is the process :<BR>
+Client open the webpage containing the applet -> applet is downloaded
+from webserver.<BR>
+applet try to open socket connection (either UDP or TCP) to the same
+ip address but on the sip proxy port to connect to the sip proxy and
+then applet and SIP proxy exchanges SIP messages.
+
+
+  </span></span></p>
+  <p class="MsoNormal" style="text-align: justify;"><span style=""><span
+ style=""><o:p></o:p></span></span></p>
+<h2><a name="6"></a><span style="text-decoration: underline;">6. Gateway configuration</span></h2>
+Your applet phone can interoperate with any proxy or gateway that does
+not drop TCP connections (assuming you are behind a firewall that does
+not let UDP through and that you are using TCP transport). For example,
+we have successfully tested it with the SER proxy.  Your gateway should be 
+configured to accept incoming TCP connections at the same port as specified
+in  src/gov/nist/applet/phone/webapp/pages/SipAppletPhone.jsp PROXYPORT.
+
+<h2 style="text-decoration: underline;">Conditions of Use</h2>
+The software included in this distribution was developed by employees
+of the National Institute of Standards and Technology (NIST), an agency
+of the Federal Government. Pursuant to title 15 Untied States Code
+Section 105, works of NIST employees are not subject to copyright
+protection in the United States and are considered to be in the public
+domain.&nbsp; As a result, a formal license is not needed to use the
+software.<br>
+  <br>
+The JAIN-SIP-APPLET-PHONE software is provided by NIST as a service and
+is expressly provided "AS IS."&nbsp; NIST MAKES NO WARRANTY OF ANY
+KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING, WITHOUT LIMITATION, THE
+IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+NON-INFRINGEMENT AND DATA ACCURACY.&nbsp; NIST does not warrant or make
+any representations regarding the use of the software or the results
+thereof, including but not limited to the correctness, accuracy,
+reliability or usefulness of the software.<br>
+  <br>
+Permission to use this software is contingent upon your acceptance of
+the terms of this agreement and upon your providing appropriate
+acknowledgments of NIST's ownership of the software.<br>
+  <br>
+  <br>
+  <br>
+  <center>
+  <h2><a href="mailto:nist-sip-dev@antd.nist.gov"> Please report bugs </a>
+  </h2>
+  </center>
+</blockquote>
+</body>
+</html> 

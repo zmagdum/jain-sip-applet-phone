@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+  "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+  <!--Initialisation Servlet-->
+  <servlet>
+    <servlet-name>init</servlet-name>
+    <servlet-class>gov.nist.applet.phone.webapp.phone.InitServlet</servlet-class>       
+    <init-param>
+        <param-name>log4j-init-file</param-name>
+        <param-value>WEB-INF/log4j.lcf</param-value>
+    </init-param>    
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+	  <servlet-name>responder</servlet-name>
+      <servlet-class>gov.nist.applet.phone.webapp.phone.ResponderServlet</servlet-class>       
+	  <load-on-startup>2</load-on-startup>
+  </servlet>
+  <!-- The Welcome File List -->
+  
+  <servlet-mapping>
+  	  <servlet-name>responder</servlet-name>
+  	  <url-pattern>/responder</url-pattern>
+  </servlet-mapping>-->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>    
+</web-app>

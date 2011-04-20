@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='us-ascii'?>
+<CONFIGURATION> 
+<!-- pstn_gateway is where the cisco dial peer is located -->
+<SIP_STACKS pstn_gateway="129.6.55.81" >     
+  
+    <SIP_STACK 
+        stack_name="public interface"
+<<<<<<< configuration_gateway.xml
+        stack_IP_address="129.6.100.252" 
+=======
+        stack_IP_address="127.0.0.1" 
+>>>>>>> 1.8
+    >       
+        <LISTENING_POINT port="4000" transport="tcp" />
+    </SIP_STACK>
+    
+    <!--
+    <SIP_STACK 
+        stack_name="private interface"
+        stack_IP_address="129.6.230.77" 
+    >       
+        <LISTENING_POINT port="4000" transport="udp" />
+    </SIP_STACK>
+    -->
+</SIP_STACKS>
+
+<!-- Push data between two networks -->
+<RTP_GATEWAY
+    enable="false"
+    min_rtp_port="9000"
+    max_rtp_port="9990"
+    max_packet_size="5000"
+/>
+
+<LOGGING
+enable_debug="false"
+server_log="./logs/server_gateway_log.txt"
+bad_message_log="./logs/bad_message_gateway_log.txt"
+debug_log="./logs/debug_gateway_log.txt"
+/>
+
+<!-- send mail when phone is busy  or the other party is unreachable -->
+<MAIL_TASK 
+	enable = "false"
+	waitTime = "15"
+/>
+
+
+
+</CONFIGURATION> 
+

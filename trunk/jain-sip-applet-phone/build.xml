@@ -1,0 +1,152 @@
+<project name="Jain-Sip-Applet-Phone" basedir="." default="all">
+    <property file="build.windows.properties"/>
+    <property name="jmf" value="${jmf.home}/lib/jmf.jar"/>
+    <property name="sip-sdp-jar" value="./lib/sip-sdp.jar"/>
+    <property name="classes" value="./classes"/>
+    <property name="lib" value="./lib"/>
+	<property name="swing.layout" value="./lib/swing-layout-1.0.3.jar"/>
+    <property name="build" value="./build"/>
+    <property name="servlet" value="${tomcat.home}/lib/servlet-api.jar"/>
+	<property name="mail" value="${mail.home}/mail.jar"/>
+	<property name="activation" value="${jaf.home}/activation.jar"/>
+	
+    <target name="init">        
+        <echo message="jmf home set to ${jmf.home}."/>
+        <echo message="jmf lib set to ${jmf}."/>
+        <echo message="running os ${os.name}"/>
+		<echo message="running jdk ${java.version}"/>
+		<echo message="tomcat home set to ${tomcat.home}"/>
+        <mkdir dir="${classes}"/>
+        <echo message="Application built."/>
+    </target>
+
+    <target name="all" depends="compile-messenger" description="Build everything."/>            
+    <!-- Clean everything -->
+    <target name="clean">
+        <delete dir="${classes}"/>
+
+    </target>
+    
+    <target name="compile-messenger" depends="init">
+        <javac srcdir="./src" destdir="${classes}" 
+		debug="true" deprecation="true"
+        	excludes="gov/nist/applet/phone/webapp/**">
+            <classpath>                                               
+                <pathelement location="${jmf}"/>
+                <pathelement location="${sip-sdp-jar}"/>
+            </classpath>
+        </javac>
+        <copy todir="${classes}/images">
+            <fileset dir="./images"/>
+        </copy>
+    </target>   
+
+    <target name="compile-webapp" depends="init">
+        <javac srcdir="./src/gov/nist/applet/phone/webapp/" destdir="${classes}" debug="true" deprecation="true">
+            <classpath>                                               
+                <pathelement location="${servlet}"/>
+            </classpath>
+        </javac>
+        <copy todir="${classes}/gov/nist/applet/phone/ua/images">
+            <fileset dir="./images"/>
+        </copy>
+    </target>   
+
+    
+    <!--                        Jar targets                              --> 
+    <target name="messenger-jar" depends="all" description="Try running it.">
+        <mkdir dir="${build}"/>
+        <delete file="${build}/${applet.phone.jar.name}"/>             
+        <jar destfile="${build}/${applet.phone.jar.name}">              
+            <fileset dir="${classes}" excludes="**/*.jar"/>            
+            <zipfileset src="${sip-sdp-jar}"/>
+            <manifest>
+                <attribute name="Built-By" value="DERUELLE Jean"/>
+                <attribute name="Main-Class" value="gov/nist/applet/phone/ua/gui/NISTMessengerApplet"/>                    
+            </manifest>
+        </jar>                
+    </target>     
+        
+    <!-- to create the keystore use the followong command, 
+    keytool -genkey -keypass nist-sip -keystore keystore -storepass iptel-->    
+    <target name="sign">
+	    <copy file="${build}/${applet.phone.jar.name}" tofile="${build}/${applet.phone.signed.jar.name}"/>
+	    <signjar keystore="${lib}/keystore"
+		jar="${build}/${applet.phone.signed.jar.name}"	
+		alias="nist"	
+		storepass="nist-sip" />
+	</target>
+       
+        
+    <!--                 Web server targets                           -->
+    
+    <!--  Builds the war file. -->
+    <target name="war" depends="messenger-jar,sign">
+        <delete file="${build}/${warname}.war"/>        
+        <copy file="${build}/${applet.phone.jar.name}" todir="src/gov/nist/applet/phone/webapp/pages"/>
+        <copy file="${build}/${applet.phone.signed.jar.name}" todir="src/gov/nist/applet/phone/webapp/pages"/>        
+        <war destfile="build/${warname}.war" compress="true" webxml="src/gov/nist/applet/phone/webapp/WEB-INF/conf/web.xml">                    
+            <fileset dir="src/gov/nist/applet/phone/webapp/pages"/>
+            <fileset dir="images">                    
+            	<include name="**/*.jpg"/>
+            	<include name="**/*.gif"/>
+            </fileset>
+            <!--<lib dir="src/gov/nist/applet/phone/webapp/WEB-INF/lib"/>-->
+            <classes dir="${classes}">                
+                <include name="**/*.class"/>                
+                <exclude name="gov/nist/applet/phone/media/**/*"/>                
+                <exclude name="gov/nist/applet/phone/ua/**/*"/>                
+                <exclude name="stack_classes/**/*"/>          
+            </classes>
+        </war>
+    </target>
+    
+    <!-- Copy the war to the tomcat distribution in the webapps directory -->
+    <target name="copy-war" depends="compile-webapp,war" description="copy the war to the Tomcat_home/webapps directory.">
+    	<copy file="build/${warname}.war" todir="${tomcat.home}/webapps"/>        
+    	<delete dir="${tomcat.home}/webapps/${warname}"/>                
+    </target>
+        
+    <!-- Builds everything and deploy it to the tomcat server. -->
+    <target name="deploy-windows" depends="compile-webapp,war" description="deploy to the Tomcat_home/webapps directory.">
+        <exec executable="${tomcat.home}/bin/catalina.bat" >
+           <arg  line= " stop" />
+		</exec>
+        <copy file="build/${warname}.war" todir="${tomcat.home}/webapps"/>        
+        <delete dir="${tomcat.home}/webapps/${warname}"/>                
+        <exec executable="${tomcat.home}/bin/catalina.bat" >
+           <arg  line= " start" />
+	</exec>
+        <echo message="war deployed"/>
+    </target>
+    
+    <!-- Builds everything and deploy it to the tomcat server. -->
+    <target name="deploy-linux" depends="compile-webapp,war" description="deploy to the Tomcat_home/webapps directory.">
+        <exec executable="${tomcat.home}/bin/catalina.sh" >
+           <arg  line= " stop" />
+	</exec>
+        <copy file="build/${warname}.war" todir="${tomcat.home}/webapps"/>        
+        <copy file="build/${warname}.war" todir="${tomcat.home}/webapps"/>        
+        <delete dir="${tomcat.home}/webapps/${warname}"/>                
+        <exec executable="${tomcat.home}/bin/catalina.sh" >
+           <arg  line= " run" />
+		</exec>
+        <echo message="war deployed"/>
+    </target>
+
+	<!-- 								standalone target							-->
+    <target name="messenger" depends="compile-messenger">
+    	<java fork="true" classname="gov.nist.applet.phone.ua.gui.NISTMessenger">
+    		<classpath>                                               
+                <pathelement location="${jmf}"/>
+                <pathelement location="${sip-sdp-jar}"/>
+                <pathelement location="${classes}"/>
+    			 <pathelement location="${swing.layout}"/>
+            </classpath>
+    	</java>
+    </target>
+    
+    <!--                                 Gateway targets                              -->
+    
+	
+</project>

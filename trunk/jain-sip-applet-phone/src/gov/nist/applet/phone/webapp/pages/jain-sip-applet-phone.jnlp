@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Jain-Sip-Applet-Phone Application -->
+  <jnlp
+  spec="1.0+"
+  codebase="http://localhost:8090/phone"
+  href="jain-sip-applet-phone.jnlp">
+    <information>
+       <title>Jain-Sip-Applet-Phone</title>
+       <vendor>NIST</vendor>
+       <description>Jain-Sip-Applet-Phone</description>
+       <description kind="short">Jain-Sip-Applet-Phone</description>
+       <offline-allowed/>
+     </information>
+     <resources>
+       <j2se version="1.4+"/>
+       <jar href="applet-phone-signed.jar"/>       
+     </resources>
+     <security>
+     	<all-permissions/>
+     </security>
+     <application-desc main-class="gov.nist.applet.phone.ua.gui.NISTMessenger"/>
+</jnlp>
