@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>>Jain Sip Applet Phone</TITLE>
+</HEAD>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr> 
+    <td width="554" ><img src="nisthome_banner.jpg" ></td>
+    <td background="nisthome-bg.jpg"> &nbsp;</td>
+  </tr>  
+  <tr> 
+    <td width="554" > <img src="main-image.jpg" ></td>
+    <td background="main-bg.jpg"> &nbsp;</td>
+  </tr>
+  <tr> 
+    <td width="554" > <img src="bottom-bar.jpg" border="0" ></td> 
+    <td background="bottom-bg.jpg"> &nbsp;</td>
+  </tr>
+</table>
+<body bgcolor="#333333" text="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"
+	link="white" alink="white" vlink="red"
+  >
+<center>
+<br><br>
+Please enter the uri, you want to use. The uri must be of the form user@domain
+<FORM method="POST" ACTION="SipAppletPhone.jsp">
+<input type="text" id="uri" name="uri" size=25>
+<input type="hidden" id="mtransport" name="mtransport" value="tcp">
+<input type="submit" value="Connect" size=4>
+</FORM>
+<br><br><br>
+Or test out the responder.
+<FORM method="POST" ACTION="responder">
+<input type="submit" value="Test Responder" size=4>
+</FORM>
+
+Or java web start it.<br>
+<a href="jain-sip-applet-phone.jnlp">Launch Jain-Sip-Applet-Phone Application</a>
+</center>
+</BODY>
+</HTML>
