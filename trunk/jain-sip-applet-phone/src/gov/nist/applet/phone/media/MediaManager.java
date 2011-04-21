@@ -3,7 +3,9 @@
  *
  * Created on December 2, 2003, 8:56 AM
  */
-
+/**
+ * 测试中文问题
+ */
 package gov.nist.applet.phone.media;
 
 import javax.sdp.SessionDescription;
