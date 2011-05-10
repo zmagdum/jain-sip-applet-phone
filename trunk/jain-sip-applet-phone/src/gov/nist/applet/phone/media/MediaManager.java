@@ -412,6 +412,7 @@ public class MediaManager {
 			Connection remoteConnection = sessionDescription.getConnection();
 			remoteAddress = remoteConnection.getAddress();
 		} catch (SdpParseException spe) {
+			
 			spe.printStackTrace();
 		}
 		localAudioPort = getAudioPort();
@@ -440,6 +441,7 @@ public class MediaManager {
 		prepareMediaSession(incomingSdpBody);
 		SessionDescription sessionDescription = null;
 		try {
+			
 			sessionDescription =
 				sdpFactory.createSessionDescription(incomingSdpBody);
 			//Get the remote address where the user agent has to connect to
@@ -456,6 +458,7 @@ public class MediaManager {
 		} catch (CloneNotSupportedException cnse) {
 			cnse.printStackTrace();
 		}
+		
 		try {
 			//Connection
 			Connection connection =

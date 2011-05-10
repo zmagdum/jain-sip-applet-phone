@@ -33,18 +33,22 @@ public class RawLiveStream implements PushBufferStream, Runnable {
     protected BufferTransferHandler transferHandler;
     protected Control [] controls = new Control[0];
 
-    //protected boolean videoData = false;
+    protected boolean videoData = false;
     
     /**
      * Create a new RawLiveStream
      */
     public RawLiveStream() {
 
-		/*if (videoData) {
+		if (videoData) {
 		    int x, y, pos, revpos;
 		    
 		    size = new Dimension(320, 240);
 		    maxDataLength = size.width * size.height * 3;
+		    /*
+		     public RGBFormat(Dimension size, int maxDataLength, Class dataType, float frameRate, int bitsPerPixel, int red, int green, 
+             int blue, int pixelStride, int lineStride, int flipped, int endian)
+		     */
 		    rgbFormat = new RGBFormat(size, maxDataLength,
 					      Format.byteArray,
 					      frameRate,
@@ -70,7 +74,7 @@ public class RawLiveStream implements PushBufferStream, Runnable {
 				}
 				revpos -= size.width * 6;
 		    }
-		} else { */// audio data
+		} else { // audio data
 		    audioFormat = new AudioFormat(AudioFormat.LINEAR,
 						  44100.0,
 						  16,
@@ -81,7 +85,7 @@ public class RawLiveStream implements PushBufferStream, Runnable {
 						  Format.NOT_SPECIFIED,
 						  Format.byteArray);
 		    maxDataLength = 822000;
-		//}
+		}
 	
 		thread = new Thread(this);
 		thread.setName("RawLiveStream Thread");
@@ -211,7 +215,8 @@ public class RawLiveStream implements PushBufferStream, Runnable {
 	/**
 	 * the execution method of the thread
 	 */
-    public void run() {
+    @SuppressWarnings("static-access")
+	public void run() {
 		while (started) {
 		    synchronized (this) {
 				while (transferHandler == null && started) {

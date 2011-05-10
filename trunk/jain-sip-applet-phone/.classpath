@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="build/applet-phone-signed.jar"/>
-	<classpathentry kind="lib" path="build/applet-phone.jar"/>
-	<classpathentry kind="lib" path="lib/JainSipApi1.1.jar"/>
+	<classpathentry kind="lib" path="build/applet-phone-signed.jar" sourcepath="D:/My Documents/桌面/开源框架/jain_sip_src"/>
+	<classpathentry kind="lib" path="build/applet-phone.jar" sourcepath="D:/My Documents/桌面/开源框架/jain_sip_src"/>
+	<classpathentry kind="lib" path="lib/JainSipApi1.1.jar" sourcepath="D:/My Documents/桌面/开源框架/jain_sip_src"/>
 	<classpathentry kind="lib" path="lib/nist-sdp-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/nist-sip-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/sip-sdp.jar"/>
-	<classpathentry kind="lib" path="lib/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/jmf.jar" sourcepath="D:/My Documents/桌面/开源框架/jmf.src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/AbsoluteLayout.jar"/>
