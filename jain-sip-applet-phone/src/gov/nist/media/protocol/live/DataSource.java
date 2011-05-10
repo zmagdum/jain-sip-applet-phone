@@ -55,9 +55,10 @@ public class DataSource extends PullDataSource {
 	 * when <CODE>connect</CODE> is called.
 	 */
 	public void connect() throws java.io.IOException {
-		connected = true;		
+		connected = true;
+
 	}
-    
+
 	/**
 	 * The <CODE>disconnect</CODE> method frees resources used to maintain a
 	 * connection to the source.
